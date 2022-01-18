@@ -8,24 +8,27 @@ package tree
  *     Right *TreeNode
  * }
  */
-func levelOrder(root *TreeNode) [][]int {
+func minDepth(root *TreeNode) int {
 	if root == nil {
-		return nil
+		return 0
 	}
 
 	var (
-		queue   []*TreeNode
-		results [][]int
+		queue []*TreeNode
+		depth = 1
 	)
 
 	queue = append(queue, root)
 	for len(queue) != 0 {
 		size := len(queue)
-		var result []int
+
 		for i := 0; i < size; i++ {
 			node := queue[0]
 			queue = queue[1:]
-			result = append(result, node.Val)
+
+			if node.Left == nil && node.Right == nil {
+				return depth
+			}
 
 			if node.Left != nil {
 				queue = append(queue, node.Left)
@@ -35,8 +38,7 @@ func levelOrder(root *TreeNode) [][]int {
 				queue = append(queue, node.Right)
 			}
 		}
-		results = append(results, result)
+		depth++
 	}
-
-	return results
+	return depth
 }
