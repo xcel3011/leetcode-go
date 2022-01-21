@@ -21,7 +21,7 @@ func maxDepth(root *TreeNode) int {
 
 func traverse(root *TreeNode) {
 	if root == nil {
-		res = max()
+		res = max(res, depth)
 		return
 	}
 
@@ -31,9 +31,9 @@ func traverse(root *TreeNode) {
 	depth--
 }
 
-func max() int {
-	if res > depth {
-		return res
+func max(a, b int) int {
+	if a > b {
+		return a
 	}
-	return depth
+	return b
 }
