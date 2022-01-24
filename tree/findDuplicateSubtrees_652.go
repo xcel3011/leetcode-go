@@ -10,38 +10,26 @@ import "fmt"
  *     Right *TreeNode
  * }
  */
-var (
-	nodes   []*TreeNode
-	nodeMap map[string]int
-)
 
 func findDuplicateSubtrees(root *TreeNode) []*TreeNode {
-	nodes = make([]*TreeNode, 0)
-	nodeMap = make(map[string]int)
-	findDuplicateSubtreesHelper(root)
-	return nodes
-}
-
-func findDuplicateSubtreesHelper(root *TreeNode) string {
+	var res []*TreeNode
 	if root == nil {
-		return "#"
+		return res
 	}
 
-	left := findDuplicateSubtreesHelper(root.Left)
-	right := findDuplicateSubtreesHelper(root.Right)
-
-	subTree := fmt.Sprintf("%s.%s.%d", left, right, root.Val)
-
-	num, ok := nodeMap[subTree]
-	if !ok {
-		nodeMap[subTree] = 0
-	} else {
-		num++
-		if num == 1 {
-			nodes = append(nodes, root)
+	subTreeMap := make(map[string]int)
+	var dfs func(*TreeNode) string
+	dfs = func(node *TreeNode) string {
+		if node == nil {
+			return "#"
 		}
-		nodeMap[subTree] = num
+		subTree := fmt.Sprintf("%v.%v.%v", dfs(node.Left), dfs(node.Right), node.Val)
+		subTreeMap[subTree]++
+		if subTreeMap[subTree] == 2 {
+			res = append(res, node)
+		}
+		return subTree
 	}
-
-	return subTree
+	dfs(root)
+	return res
 }
