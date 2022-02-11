@@ -4,15 +4,14 @@ type NumArray struct {
 	prevSum []int
 }
 
-func Constructor(nums []int) NumArray {
+func NewNumArray(nums []int) NumArray {
 	array := NumArray{
 		prevSum: make([]int, len(nums)+1),
 	}
 
-	for i := 1; i <= len(nums); i++ {
-		array.prevSum[i] = array.prevSum[i-1] + nums[i-1]
+	for i, num := range nums {
+		array.prevSum[i+1] = array.prevSum[i] + num
 	}
-
 	return array
 }
 
