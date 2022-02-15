@@ -2,36 +2,41 @@ package array
 
 func spiralOrder(matrix [][]int) []int {
 	var (
-		res                       []int
-		n                         = len(matrix)
-		upper, lower, left, right = 0, len(matrix) - 1, 0, len(matrix) - 1
+		m, n                      = len(matrix), len(matrix[0])
+		res                       = make([]int, m*n)
+		count                     int
+		upper, lower, left, right = 0, len(matrix) - 1, 0, len(matrix[0]) - 1
 	)
 
-	for len(res) < n*n {
+	for count < n*m {
 		if upper <= right {
 			for i := left; i <= right; i++ {
-				res = append(res, matrix[upper][i])
+				res[count] = matrix[upper][i]
+				count++
 			}
 			upper++
 		}
 
 		if right >= left {
 			for i := upper; i <= lower; i++ {
-				res = append(res, matrix[i][right])
+				res[count] = matrix[i][right]
+				count++
 			}
 			right--
 		}
 
 		if lower >= upper {
 			for i := right; i >= left; i-- {
-				res = append(res, matrix[lower][i])
+				res[count] = matrix[lower][i]
+				count++
 			}
 			lower--
 		}
 
 		if left <= right {
 			for i := lower; i >= upper; i-- {
-				res = append(res, matrix[i][left])
+				res[count] = matrix[i][left]
+				count++
 			}
 			left++
 		}
