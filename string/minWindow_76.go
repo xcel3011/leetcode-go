@@ -3,10 +3,10 @@ package string
 import "math"
 
 func minWindow(s string, t string) string {
-	need := make(map[int]int)
-	window := make(map[int]int)
+	need := make(map[byte]int)
+	window := make(map[byte]int)
 	for i := range t {
-		need[int(t[i])]++
+		need[t[i]]++
 	}
 
 	left, right := 0, 0
@@ -14,7 +14,7 @@ func minWindow(s string, t string) string {
 	start, l := 0, math.MaxInt
 
 	for right < len(s) {
-		c := int(s[right])
+		c := s[right]
 		right++
 
 		if _, ok := need[c]; ok {
@@ -30,7 +30,7 @@ func minWindow(s string, t string) string {
 				l = right - left
 			}
 
-			d := int(s[left])
+			d := s[left]
 			left++
 			if _, ok := need[d]; ok {
 				if window[d] == need[d] {
