@@ -1,4 +1,4 @@
-package array
+package num
 
 func singleNumber(nums []int) int {
 	var single int
