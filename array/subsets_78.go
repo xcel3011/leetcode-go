@@ -14,3 +14,24 @@ func subsets(nums []int) [][]int {
 
 	return res
 }
+
+func subsets1(nums []int) [][]int {
+	if len(nums) == 0 {
+		return [][]int{{}}
+	}
+
+	var (
+		num int
+		n   = len(nums)
+	)
+	num, nums = nums[n-1], nums[:n-1]
+
+	// 递归算出所有的子集
+	res := subsets1(nums)
+	size := len(res)
+	for i := 0; i < size; i++ {
+		res = append(res, append([]int{}, append(res[i], num)...))
+	}
+
+	return res
+}
