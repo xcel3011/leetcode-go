@@ -1,36 +1,25 @@
 package dynamic_programming
 
-var minDistanceMemo [][]int
-
 func minDistance(word1 string, word2 string) int {
-	n, m := len(word1), len(word2)
-	minDistanceMemo = make([][]int, n)
-	for i := 0; i < n; i++ {
-		minDistanceMemo[i] = make([]int, m)
-		for j := 0; j < m; j++ {
-			minDistanceMemo[i][j] = -1
+	m, n := len(word1), len(word2)
+	dp := make([][]int, m+1)
+	for i := range dp {
+		dp[i] = make([]int, n+1)
+	}
+	for i := 0; i < m+1; i++ {
+		dp[i][0] = i // word1[i] 变成 word2[0], 删掉 word1[i], 需要 i 部操作
+	}
+	for j := 0; j < n+1; j++ {
+		dp[0][j] = j // word1[0] 变成 word2[j], 插入 word1[j]，需要 j 部操作
+	}
+	for i := 1; i < m+1; i++ {
+		for j := 1; j < n+1; j++ {
+			if word1[i-1] == word2[j-1] {
+				dp[i][j] = dp[i-1][j-1]
+			} else { // Min(插入，删除，替换)
+				dp[i][j] = min(dp[i][j-1], dp[i-1][j], dp[i-1][j-1]) + 1
+			}
 		}
 	}
-	return minDistanceDP(word1, word2, n-1, m-1)
-}
-
-func minDistanceDP(s1, s2 string, n, m int) int {
-	if n == -1 {
-		return 0
-	}
-	if m == -1 {
-		return 0
-	}
-	if minDistanceMemo[n][m] != -1 {
-		return minDistanceMemo[n][m]
-	}
-	if s1[n] == s2[m] {
-		minDistanceMemo[n][m] = minDistanceDP(s1, s2, n-1, m-1)
-	}
-	minDistanceMemo[n][m] = min(
-		minDistanceDP(s1, s2, n-1, m)+1,   // 删除
-		minDistanceDP(s1, s2, n-1, m-1)+1, // 替换
-		minDistanceDP(s1, s2, n, m-1)+1,   // 插入
-	)
-	return minDistanceMemo[n][m]
+	return dp[m][n]
 }
