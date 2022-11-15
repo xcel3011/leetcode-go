@@ -1,4 +1,4 @@
-package dynamic_programming
+package dynamic
 
 // O(N^2)
 func lengthOfLIS(nums []int) int {

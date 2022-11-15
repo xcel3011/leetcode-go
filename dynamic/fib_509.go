@@ -1,4 +1,4 @@
-package dynamic_programming
+package dynamic
 
 func fibRecursion(n int) int {
 	if n == 0 || n == 1 {
