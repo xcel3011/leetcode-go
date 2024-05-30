@@ -48,13 +48,3 @@ func dp(matrix [][]int, i, j int) int {
 
 	return memo[i][j]
 }
-
-func min(a ...int) int {
-	res := a[0]
-	for _, v := range a[1:] {
-		if v < res {
-			res = v
-		}
-	}
-	return res
-}
