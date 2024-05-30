@@ -9,8 +9,10 @@ func maxVowels(s string, k int) int {
 	for i := 0; i < k; i++ {
 		count += m[s[i]]
 	}
+	ans := count
 	for i := k; i < len(s); i++ {
 		count += m[s[i]] - m[s[i-k]]
+		ans = max(ans, count)
 	}
-	return count
+	return ans
 }
