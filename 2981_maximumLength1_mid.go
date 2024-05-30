@@ -5,7 +5,7 @@ import (
 )
 
 // max(a[0]−2,min(a[0]−1,a[1]),a[2])
-func maximumLength(s string) int {
+func maximumLength1(s string) int {
 	//"abcaba"
 	// 按字母分类，找到连续出现次数
 	//对啊来说就是[0][]int{1,1}

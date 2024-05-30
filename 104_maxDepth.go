@@ -30,10 +30,3 @@ func traverse(root *TreeNode) {
 	traverse(root.Right)
 	depth--
 }
-
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
-}
