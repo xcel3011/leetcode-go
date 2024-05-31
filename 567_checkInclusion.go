@@ -39,3 +39,33 @@ func checkInclusion(s1 string, s2 string) bool {
 
 	return false
 }
+
+func checkInclusion240531(s1 string, s2 string) bool {
+	// 肯定不存在
+	m, n := len(s1), len(s2)
+	if n < m {
+		return false
+	}
+
+	// 初始化窗口
+	cs1, cs2 := [26]int{}, [26]int{}
+	for i := 0; i < m; i++ {
+		cs1[s1[i]-'a']++
+		cs2[s2[i]-'a']++
+	}
+
+	// 判断初始化的情况是否相等
+	if cs1 == cs2 {
+		return true
+	}
+
+	// 窗口向右移动
+	for i := m; i < n; i++ {
+		cs2[s2[i]-'a']++
+		cs2[s2[i-m]-'a']--
+		if cs1 == cs2 {
+			return true
+		}
+	}
+	return false
+}

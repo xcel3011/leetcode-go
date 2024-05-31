@@ -38,3 +38,33 @@ func findAnagrams(s string, p string) []int {
 
 	return res
 }
+
+func findAnagrams240531(s string, p string) []int {
+	m, n := len(s), len(p)
+	if n > m {
+		return nil
+	}
+
+	// 初始化窗口
+	counts, countp := [26]int{}, [26]int{}
+	for i := 0; i < n; i++ {
+		counts[s[i]-'a']++
+		countp[p[i]-'a']++
+	}
+
+	// 判断初始窗口是否合法
+	var ans []int
+	if countp == counts {
+		ans = append(ans, 0)
+	}
+
+	// 向右滑动窗口
+	for i := n; i < m; i++ {
+		counts[s[i]-'a']++
+		counts[s[i-n]-'a']--
+		if countp == counts {
+			ans = append(ans, i-n+1)
+		}
+	}
+	return ans
+}
