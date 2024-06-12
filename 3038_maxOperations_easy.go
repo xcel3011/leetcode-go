@@ -17,9 +17,10 @@ func maxOperations(nums []int) int {
 			sum = nums[0] + nums[1]
 			continue
 		}
-		if nums[i]+nums[i+1] > sum {
-			ans++
+		if nums[i]+nums[i+1] != sum {
+			break
 		}
+		ans++
 	}
 	return ans
 }
