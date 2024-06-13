@@ -1,5 +1,9 @@
 package leetcode_go
 
+import (
+	"math"
+)
+
 /**
  * Definition for a binary tree node.
  * type TreeNode struct {
@@ -8,7 +12,7 @@ package leetcode_go
  *     Right *TreeNode
  * }
  */
-func minDepth(root *TreeNode) int {
+func minDepthOld(root *TreeNode) int {
 	if root == nil {
 		return 0
 	}
@@ -41,4 +45,22 @@ func minDepth(root *TreeNode) int {
 		depth++
 	}
 	return depth
+}
+
+func minDepth(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	if root.Left == nil && root.Right == nil {
+		return 1
+	}
+	depth := math.MaxInt
+	if root.Left != nil {
+		depth = min(minDepth(root.Left), depth)
+	}
+	if root.Right != nil {
+		depth = min(minDepth(root.Right), depth)
+	}
+
+	return depth + 1
 }

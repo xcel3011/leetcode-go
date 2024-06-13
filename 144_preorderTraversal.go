@@ -25,3 +25,20 @@ func preorderTraversalHelper(root *TreeNode) {
 	preorderTraversalHelper(root.Left)
 	preorderTraversalHelper(root.Right)
 }
+
+func preorderTraversal20240612(root *TreeNode) []int {
+	var (
+		vals []int
+		f    func(node *TreeNode)
+	)
+	f = func(node *TreeNode) {
+		if node == nil {
+			return
+		}
+		vals = append(vals, node.Val)
+		f(node.Left)
+		f(node.Right)
+	}
+	f(root)
+	return vals
+}

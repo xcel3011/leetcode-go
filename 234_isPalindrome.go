@@ -7,7 +7,7 @@ package leetcode_go
  *     Next *ListNode
  * }
  */
-func isPalindrome(head *ListNode) bool {
+func isPalindrome234(head *ListNode) bool {
 	reverse := func(node *ListNode) *ListNode {
 		var prev *ListNode
 		curr := node

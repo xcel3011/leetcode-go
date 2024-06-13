@@ -8,25 +8,30 @@ package leetcode_go
  *     Right *TreeNode
  * }
  */
-var (
-	depth int
-	res   int
-)
 
 func maxDepth(root *TreeNode) int {
-	depth, res = 0, 0
-	traverse(root)
-	return res
+	var f func(root *TreeNode)
+	ans, depth := 0, 0
+	f = func(root *TreeNode) {
+		if root == nil {
+			ans = max(ans, depth)
+			return
+		}
+		depth++
+		f(root.Left)
+		f(root.Right)
+		depth--
+	}
+	f(root)
+	return ans
 }
 
-func traverse(root *TreeNode) {
+func maxDepth1(root *TreeNode) int {
 	if root == nil {
-		res = max(res, depth)
-		return
+		return 0
 	}
+	leftDepth := maxDepth1(root.Left)
+	rightDepth := maxDepth1(root.Right)
 
-	depth++
-	traverse(root.Left)
-	traverse(root.Right)
-	depth--
+	return max(leftDepth, rightDepth) + 1
 }

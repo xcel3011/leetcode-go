@@ -2,7 +2,7 @@ package leetcode_go
 
 import "strconv"
 
-func isPalindrome(x int) bool {
+func isPalindrome9(x int) bool {
 	str := strconv.Itoa(x)
 	left, right := 0, len(str)-1
 

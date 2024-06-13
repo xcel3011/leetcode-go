@@ -2,7 +2,7 @@ package leetcode_go
 
 import "strings"
 
-func isPalindrome(s string) bool {
+func isPalindrome125(s string) bool {
 	var ss string
 	s = strings.ToLower(s)
 	for i := range s {
