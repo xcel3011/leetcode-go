@@ -7,5 +7,6 @@ func countCompleteDayPairs2(hours []int) int64 {
 		ans += int64(cnt[24-h%24])
 		cnt[h%24]++
 	}
+
 	return ans
 }
