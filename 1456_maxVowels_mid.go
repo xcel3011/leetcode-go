@@ -16,3 +16,22 @@ func maxVowels(s string, k int) int {
 	}
 	return ans
 }
+
+func maxVowels250321(s string, k int) int {
+	ans, cnt := 0, 0
+	for i, in := range s {
+		if in == 'a' || in == 'e' || in == 'i' || in == 'o' || in == 'u' {
+			cnt++
+		}
+
+		if i < k-1 {
+			continue
+		}
+		ans = max(ans, cnt)
+		out := s[i-k+1]
+		if out == 'a' || out == 'e' || out == 'i' || out == 'o' || out == 'u' {
+			cnt--
+		}
+	}
+	return ans
+}
