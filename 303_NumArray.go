@@ -1,22 +1,19 @@
 package leetcode_go
 
 type NumArray struct {
-	prevSum []int
+	prefixSum []int
 }
 
-func NewNumArray(nums []int) NumArray {
-	array := NumArray{
-		prevSum: make([]int, len(nums)+1),
+func Constructor(nums []int) NumArray {
+	prefixSum := make([]int, len(nums)+1)
+	for i := 0; i < len(nums); i++ {
+		prefixSum[i+1] = prefixSum[i] + nums[i]
 	}
-
-	for i, num := range nums {
-		array.prevSum[i+1] = array.prevSum[i] + num
-	}
-	return array
+	return NumArray{prefixSum: prefixSum}
 }
 
-func (array *NumArray) SumRange(left int, right int) int {
-	return array.prevSum[right+1] - array.prevSum[left]
+func (this *NumArray) SumRange(left int, right int) int {
+	return this.prefixSum[right+1] - this.prefixSum[left]
 }
 
 /**
