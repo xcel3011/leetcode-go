@@ -22,3 +22,24 @@ func isPalindrome125(s string) bool {
 
 	return true
 }
+
+func isPalindrome250326(s string) bool {
+	b := strings.Builder{}
+	s = strings.ToLower(s)
+	for i := 0; i < len(s); i++ {
+		if (s[i] >= 'a' && s[i] <= 'z') || (s[i] >= '0' && s[i] <= '9') {
+			b.WriteByte(s[i])
+		}
+	}
+
+	ss := b.String()
+	l, r := 0, len(ss)-1
+	for l <= r {
+		if ss[l] != ss[r] {
+			return false
+		}
+		l++
+		r--
+	}
+	return true
+}
