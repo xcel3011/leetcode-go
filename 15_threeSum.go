@@ -119,3 +119,48 @@ func threeSum250327(nums []int) (res [][]int) {
 	}
 	return
 }
+
+func threeSum250408(nums []int) [][]int {
+	//先从小到大排序
+	slices.Sort(nums)
+
+	var ans [][]int
+
+	//枚举I
+	for i, x := range nums[:len(nums)-2] {
+		//跳过重复
+		if i > 0 && x == nums[i-1] {
+			continue
+		}
+		//最小的三个都大于零
+		if x+nums[i+1]+nums[i+2] > 0 {
+			break
+		}
+		//x加最大的两个小于0
+		if x+nums[len(nums)-1]+nums[len(nums)-2] < 0 {
+			continue
+		}
+
+		l, r := i+1, len(nums)-1
+		for l < r {
+			sum := x + nums[l] + nums[r]
+			if sum > 0 {
+				r--
+			} else if sum < 0 {
+				l++
+			} else {
+				ans = append(ans, []int{x, nums[l], nums[r]})
+				l++
+				for l < r && nums[l] == nums[l-1] {
+					l++
+				}
+				r--
+				for r > l && nums[r] == nums[r+1] {
+					r--
+				}
+			}
+
+		}
+	}
+	return ans
+}

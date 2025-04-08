@@ -38,3 +38,22 @@ func triangleNumber(nums []int) int {
 	}
 	return ans
 }
+
+func triangleNumber250408(nums []int) int {
+	slices.Sort(nums)
+	ans := 0
+	for i := 2; i < len(nums); i++ {
+		l, r := 0, i-1
+		for l < r {
+			sum := nums[l] + nums[r]
+			if sum > nums[i] {
+				ans += r - l
+				r--
+			} else {
+				l++
+			}
+		}
+	}
+	return ans
+
+}
