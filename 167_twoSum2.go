@@ -66,3 +66,22 @@ func twoSum250327(numbers []int, target int) []int {
 	}
 	return ans
 }
+
+func twoSum250408(numbers []int, target int) (ans []int) {
+
+	l, r := 0, len(numbers)-1
+
+	for l < r {
+		sum := numbers[l] + numbers[r]
+		if sum == target {
+			ans = []int{l + 1, r + 1}
+			break
+		} else if sum > target {
+			r--
+		} else if sum < target {
+			l++
+		}
+	}
+
+	return
+}

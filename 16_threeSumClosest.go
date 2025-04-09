@@ -123,3 +123,38 @@ func threeSumClosest250327(nums []int, target int) int {
 	}
 	return ans
 }
+
+func threeSumClosest250408(nums []int, target int) int {
+	slices.Sort(nums)
+	_abs := func(a int) int {
+		if a < 0 {
+			return -a
+		}
+		return a
+	}
+	ans := math.MaxInt
+	for i := 0; i < len(nums); i++ {
+		l, r := i+1, len(nums)-1
+		for l < r {
+			sum := nums[i] + nums[l] + nums[r]
+			if sum == target {
+				return target
+			}
+			if _abs(sum-target) < _abs(ans-target) {
+				ans = sum
+			}
+			if sum > target {
+				r--
+				for r > l && nums[r] == nums[r+1] {
+					r--
+				}
+			} else if sum < target {
+				l++
+				for l < r && nums[l] == nums[l-1] {
+					l++
+				}
+			}
+		}
+	}
+	return ans
+}
