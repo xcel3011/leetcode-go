@@ -51,3 +51,18 @@ func maxSubarrayLength(nums []int, k int) int {
 
 	return ans
 }
+
+func maxSubarrayLength250416(nums []int, k int) int {
+	ans := 0
+	left := 0
+	cnt := map[int]int{}
+	for right, x := range nums {
+		cnt[x]++
+		for cnt[x] > k {
+			cnt[nums[left]]--
+			left++
+		}
+		ans = max(ans, right-left+1)
+	}
+	return ans
+}

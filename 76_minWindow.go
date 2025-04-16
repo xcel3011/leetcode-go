@@ -116,3 +116,39 @@ func minWindow250325(s string, t string) string {
 	}
 	return s[start:end]
 }
+
+func minWindow250416(s string, t string) string {
+	need := make(map[byte]int)
+	for i := 0; i < len(t); i++ {
+		need[t[i]]++
+	}
+	window := make(map[byte]int)
+	left := 0
+	valid := 0
+	start, end := 0, math.MaxInt
+	for right := 0; right < len(s); right++ {
+		if need[s[right]] > 0 {
+			window[s[right]]++
+			if window[s[right]] == need[s[right]] {
+				valid++
+			}
+		}
+		for valid == len(need) {
+			if right-left < end-start {
+				start = left
+				end = right
+			}
+			if need[s[left]] > 0 {
+				if window[s[left]] == need[s[left]] {
+					valid--
+				}
+				window[s[left]]--
+			}
+			left++
+		}
+	}
+	if end == math.MaxInt {
+		return ""
+	}
+	return s[start : end+1]
+}

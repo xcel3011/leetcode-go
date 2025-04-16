@@ -45,3 +45,18 @@ func countSubarrays250326(nums []int, k int64) int64 {
 	}
 	return int64(ans)
 }
+
+func countSubarrays2302250416(nums []int, k int64) int64 {
+	ans := 0
+	sum := 0
+	left := 0
+	for right, x := range nums {
+		sum += x
+		for int64(sum*(right-left+1)) >= k {
+			sum -= nums[left]
+			left++
+		}
+		ans += right - left + 1
+	}
+	return int64(ans)
+}

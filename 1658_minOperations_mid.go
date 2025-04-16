@@ -64,3 +64,31 @@ func minOperations250325(nums []int, x int) int {
 
 	return ans
 }
+
+func minOperations250416(nums []int, x int) int {
+	sum := 0
+	for _, v := range nums {
+		sum += v
+	}
+	target := sum - x
+	if target < 0 {
+		return -1
+	}
+	ans := math.MaxInt
+	cnt := 0
+	left := 0
+	for right, num := range nums {
+		cnt += num
+		for cnt > target {
+			cnt -= nums[left]
+			left++
+		}
+		if cnt == target {
+			ans = min(ans, len(nums)-(right-left+1))
+		}
+	}
+	if ans == math.MaxInt {
+		return -1
+	}
+	return ans
+}

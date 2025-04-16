@@ -31,3 +31,18 @@ func numSubarrayProductLessThanK(nums []int, k int) int {
 	}
 	return ans
 }
+
+func numSubarrayProductLessThanK250416(nums []int, k int) int {
+	ans := 0
+	prod := 1
+	left := 0
+	for right, x := range nums {
+		prod *= x
+		for prod >= k && left <= right {
+			prod /= nums[left]
+			left++
+		}
+		ans += right - left + 1
+	}
+	return ans
+}

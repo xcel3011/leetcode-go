@@ -44,3 +44,23 @@ func countSubarrays(nums []int, k int) int64 {
 	}
 	return int64(ans)
 }
+
+func countSubarrays250416(nums []int, k int) int64 {
+	ans := 0
+	cnt := 0
+	mx := slices.Max(nums)
+	left := 0
+	for _, x := range nums {
+		if x == mx {
+			cnt++
+		}
+		for cnt == k {
+			if nums[left] == mx {
+				cnt--
+			}
+			left++
+		}
+		ans += left
+	}
+	return int64(ans)
+}

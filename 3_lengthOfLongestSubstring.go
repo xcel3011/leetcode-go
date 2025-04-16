@@ -72,3 +72,18 @@ func lengthOfLongestSubstring250325(s string) int {
 	}
 	return ans
 }
+
+func lengthOfLongestSubstring250416(s string) int {
+	ans := 0
+	cnt := map[byte]int{}
+	left := 0
+	for right := 0; right < len(s); right++ {
+		cnt[s[right]]++
+		for cnt[s[right]] > 1 {
+			cnt[s[left]]--
+			left++
+		}
+		ans = max(ans, right-left+1)
+	}
+	return ans
+}

@@ -43,3 +43,24 @@ func minSubArrayLen(target int, nums []int) int {
 
 	return ans
 }
+
+func minSubArrayLen250416(target int, nums []int) int {
+	n := len(nums)
+	ans := n + 1
+	sum := 0
+	left := 0
+	for right, x := range nums {
+		sum += x
+		for sum-nums[left] >= target {
+			sum -= nums[left]
+			left++
+		}
+		if sum >= target {
+			ans = min(ans, right-left+1)
+		}
+	}
+	if ans == n+1 {
+		return 0
+	}
+	return ans
+}

@@ -41,3 +41,22 @@ func longestOnes(nums []int, k int) int {
 	}
 	return ans
 }
+
+func longestOnes250416(nums []int, k int) int {
+	ans := 0
+	cnt := 0
+	left := 0
+	for right, x := range nums {
+		if x == 0 {
+			cnt++
+		}
+		for cnt > k {
+			if nums[left] == 0 {
+				cnt--
+			}
+			left++
+		}
+		ans = max(ans, right-left+1)
+	}
+	return ans
+}
