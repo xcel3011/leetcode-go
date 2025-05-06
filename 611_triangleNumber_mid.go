@@ -39,6 +39,29 @@ func triangleNumber(nums []int) int {
 	return ans
 }
 
+// 同向双指针
+func triangleNumber250403(nums []int) int {
+	// 所有边从小到大排序
+	slices.Sort(nums)
+	ans := 0
+	// 固定最小边，找到c-b>a的最大边
+	for i := 0; i < len(nums)-2; i++ {
+		// 边长不能为0
+		if nums[i] == 0 {
+			continue
+		}
+		j := i + 1
+		for k := i + 2; k < len(nums); k++ {
+			// 找到最大的j，使得nums[j] < nums[i]+nums[k]
+			for nums[k]-nums[j] >= nums[i] && j < k {
+				j++
+			}
+			ans += k - j
+		}
+	}
+	return ans
+}
+
 func triangleNumber250408(nums []int) int {
 	slices.Sort(nums)
 	ans := 0
@@ -55,5 +78,4 @@ func triangleNumber250408(nums []int) int {
 		}
 	}
 	return ans
-
 }
