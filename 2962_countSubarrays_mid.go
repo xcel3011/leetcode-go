@@ -45,6 +45,38 @@ func countSubarrays(nums []int, k int) int64 {
 	return int64(ans)
 }
 
+func countSubarrays250429mid(nums []int, k int) int64 {
+	mx := slices.Max(nums)
+	cnt := 0
+	left, right := 0, 0
+	ans := 0
+	for right < len(nums) {
+		//判断右侧进入窗口是否为最大值
+		if nums[right] == mx {
+			cnt++
+		}
+
+		//右指针移动
+		right++
+
+		//如果当前满足k
+		for cnt == k {
+			//
+			if nums[left] == mx {
+				cnt--
+			}
+			left++
+		}
+
+		//right=4,left=2
+		//[3,2,3],[1,3,2,3]
+		//right=5,left=5
+		//[3,3],[2,3,3],[3,2,3,3],[1,3,2,3,3]
+		ans += left
+	}
+	return int64(ans)
+}
+
 func countSubarrays250416(nums []int, k int) int64 {
 	ans := 0
 	cnt := 0
