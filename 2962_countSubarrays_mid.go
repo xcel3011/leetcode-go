@@ -51,15 +51,15 @@ func countSubarrays250429mid(nums []int, k int) int64 {
 	left, right := 0, 0
 	ans := 0
 	for right < len(nums) {
-		//判断右侧进入窗口是否为最大值
+		// 判断右侧进入窗口是否为最大值
 		if nums[right] == mx {
 			cnt++
 		}
 
-		//右指针移动
+		// 右指针移动
 		right++
 
-		//如果当前满足k
+		// 如果当前满足k
 		for cnt == k {
 			//
 			if nums[left] == mx {

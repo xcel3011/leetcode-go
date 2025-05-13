@@ -17,3 +17,19 @@ func hIndex(citations []int) int {
 	}
 	return r
 }
+
+func hIndex250417(citations []int) int {
+	left, right := 1, len(citations)+1 //[1,n+1)左闭右开
+	for left < right {
+		// 至少有mid篇论文的引用次数>=mid
+		mid := left + (right-left)/2
+
+		// 判断第n-mid篇论文的引用次数是否>=mid
+		if citations[len(citations)-mid] >= mid {
+			left = mid + 1 //[mid+1,right)
+		} else {
+			right = mid //[left,mid)
+		}
+	}
+	return left - 1
+}

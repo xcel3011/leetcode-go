@@ -42,3 +42,12 @@ func searchRange250321(nums []int, target int) []int {
 	end, _ := slices.BinarySearch(nums, target+1)
 	return []int{start, end - 1}
 }
+
+func searchRange250417(nums []int, target int) []int {
+	begin, ok := slices.BinarySearch(nums, target)
+	if !ok {
+		return []int{-1, -1}
+	}
+	end, _ := slices.BinarySearch(nums, target+1)
+	return []int{begin, end - 1}
+}
