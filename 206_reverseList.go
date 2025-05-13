@@ -77,3 +77,21 @@ func reverseListIterate(head *ListNode) *ListNode {
 
 	return prev
 }
+
+func reverseList250513(head *ListNode) *ListNode {
+	// 当前head的前一个节点为空
+	var pre *ListNode
+	cur := head
+
+	for cur != nil {
+		// 记录当前节点的下一个节点
+		nxt := cur.Next
+		// 当前节点的下一个节点指向当前节点的前一个节点
+		cur.Next = pre
+		// 当前节点的前一个节点指向当前节点
+		pre = cur
+		// 当前节点指向当前节点的下一个节点
+		cur = nxt
+	}
+	return pre
+}
