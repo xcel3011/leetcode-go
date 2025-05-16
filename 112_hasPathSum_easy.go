@@ -24,3 +24,15 @@ func hasPathSum(root *TreeNode, targetSum int) bool {
 	}
 	return false
 }
+
+func hasPathSum250516(root *TreeNode, targetSum int) bool {
+	if root == nil {
+		return false
+	}
+	targetSum -= root.Val
+	// 如果遇到叶子节点，判断是否满足条件
+	if root.Left == nil && root.Right == nil {
+		return targetSum == 0
+	}
+	return hasPathSum250516(root.Left, targetSum) || hasPathSum250516(root.Right, targetSum)
+}

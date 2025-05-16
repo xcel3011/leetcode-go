@@ -64,3 +64,45 @@ func minDepth(root *TreeNode) int {
 
 	return depth + 1
 }
+
+func minDepth250516(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	if root.Left == nil && root.Right == nil {
+		return 1
+	}
+	depth := math.MaxInt
+	if root.Left != nil {
+		depth = min(minDepth250516(root.Left), depth)
+	}
+	if root.Right != nil {
+		depth = min(minDepth250516(root.Right), depth)
+	}
+	return depth + 1
+}
+
+func minDepthDfs(root *TreeNode) int {
+	ans := math.MaxInt
+	var dfs func(*TreeNode, int)
+	dfs = func(node *TreeNode, cnt int) {
+		if node == nil {
+			return
+		}
+		cnt++
+		if cnt > ans {
+			return
+		}
+		if node.Left == nil && node.Right == nil {
+			ans = min(ans, cnt)
+			return
+		}
+		dfs(node.Left, cnt)
+		dfs(node.Right, cnt)
+	}
+	dfs(root, 0)
+	if root != nil {
+		return ans
+	}
+	return 0
+}
