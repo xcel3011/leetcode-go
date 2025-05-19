@@ -17,3 +17,11 @@ func isSameTree(p *TreeNode, q *TreeNode) bool {
 	}
 	return isSameTree(p.Left, q.Left) && isSameTree(p.Right, q.Right)
 }
+
+func isSameTree250516(p *TreeNode, q *TreeNode) bool {
+	if p == nil || q == nil {
+		return p == q
+	}
+
+	return p.Val == q.Val && isSameTree250516(p.Left, q.Left) && isSameTree250516(p.Right, q.Right)
+}

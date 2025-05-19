@@ -29,3 +29,16 @@ func invertTree(root *TreeNode) *TreeNode {
 
 	return root
 }
+
+func invertTree250516(root *TreeNode) *TreeNode {
+	if root == nil {
+		return nil
+	}
+
+	left := root.Left
+	root.Left = root.Right
+	root.Right = left
+	invertTree250516(root.Left)
+	invertTree250516(root.Right)
+	return root
+}
