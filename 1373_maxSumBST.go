@@ -65,3 +65,25 @@ func maxSumBST(root *TreeNode) int {
 	traverse(root)
 	return maxSum
 }
+
+func maxSumBST250520(root *TreeNode) int {
+	ans := 0
+	var dfs func(node *TreeNode) (mx, mn, sum int)
+	dfs = func(node *TreeNode) (mx, mn, sum int) {
+		if node == nil {
+			return math.MinInt, math.MaxInt, 0
+		}
+		lmx, lmn, lsum := dfs(node.Left)
+		rmx, rmn, rsum := dfs(node.Right)
+		x := node.Val
+		// 不是二叉搜索树
+		if x <= lmx || x >= rmn {
+			return math.MaxInt, math.MinInt, 0
+		}
+		sum = lsum + rsum + x
+		ans = max(ans, sum)
+		return max(rmx, x), min(lmn, x), sum
+	}
+	dfs(root)
+	return ans
+}

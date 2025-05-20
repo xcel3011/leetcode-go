@@ -27,3 +27,22 @@ func kthSmallest(root *TreeNode, k int) int {
 	traverse(root, k)
 	return val
 }
+
+func kthSmallest250520(root *TreeNode, k int) int {
+	index, ans := 0, 0
+	var dfs func(*TreeNode)
+	dfs = func(node *TreeNode) {
+		if node == nil {
+			return
+		}
+		dfs(node.Left)
+		index++
+		if index == k {
+			ans = node.Val
+			return
+		}
+		dfs(node.Right)
+	}
+	dfs(root)
+	return ans
+}
